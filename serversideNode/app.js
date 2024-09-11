@@ -83,7 +83,7 @@ function getSearchersSendNotification(latitude, longitude, latestLeavingID, time
               ),
               headers: {
                 "Content-type": "application/json;",
-                "Authorization": "key=AAAApgoyr0U:APA91bHYJ4NzEXd9R0F85xRsiojmtMfVMHn4bANenDLIxQ4dbv29H2v6hoR1iIPvdWX-ILTmp7OdoSxEr41_12FdjxPj0MgdGqJoZyT2ZYzRmEDEtzyKjU8fSsnoUjVywdt5abGy-AvH "
+                "Authorization": ""
               }
             });
 
