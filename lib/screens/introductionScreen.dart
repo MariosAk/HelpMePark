@@ -23,7 +23,7 @@ class _IntroScreenState extends State<IntroScreen> {
 
   @override
   Widget build(BuildContext context) {
-    PageDecoration pageDecoration = PageDecoration(
+    PageDecoration pageDecoration = const PageDecoration(
       titleTextStyle: TextStyle(
           fontSize: 28.0, fontWeight: FontWeight.w700, color: Colors.grey),
     );
@@ -37,7 +37,7 @@ class _IntroScreenState extends State<IntroScreen> {
           appBar: AppBar(
             elevation: 0,
             backgroundColor: Colors.white,
-            title: Text("ParkingApp"),
+            title: const Text("ParkingApp"),
             centerTitle: true,
           ),
           body: Center(

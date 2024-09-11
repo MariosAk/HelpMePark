@@ -15,17 +15,17 @@ class EnableLocation extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
           Container(
-              color: Color.fromRGBO(246, 255, 255, 1.0),
+              color: const Color.fromRGBO(246, 255, 255, 1.0),
               child: SafeArea(
                   child: CircleAvatar(
-                backgroundColor: Color.fromRGBO(246, 255, 255, 1.0),
+                backgroundColor: const Color.fromRGBO(246, 255, 255, 1.0),
                 radius: 100,
                 child: Image.asset('Assets/Images/location.gif'),
               ))),
           Text(
             "Please enable location services.",
             style: GoogleFonts.openSans(
-                textStyle: TextStyle(color: Colors.black),
+                textStyle: const TextStyle(color: Colors.black),
                 fontWeight: FontWeight.w600,
                 fontSize: 20),
             textAlign: TextAlign.center,

@@ -25,7 +25,7 @@ class _ParkingLocationState extends State<ParkingLocation>
   OverlayState? overlayState;
   AnimationController? _animationController;
   Animation<double>? _animation;
-  String TomTomApiKey = 'qa5MzxXesmBUxRLaWQnFRmMZ2D33kE7b';
+  String TomTomApiKey = '';
   late Future _getRoute;
   List<LatLng> pointsList = [];
   double lati = 0;

@@ -20,11 +20,8 @@ class _LoginPageState extends State<LoginPage> {
   Future<String> loginUser(email, password) async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      var response = await http.get(
-          //Uri.parse("http://192.168.1.26:8080/pasthelwparking/searching.php"), //vm
-          Uri.parse(
-              "http://192.168.1.26:3000/login-user?email=$email&password=$password"));
-      //var userid_cookie = new Cookie("userID", response.body.toString());
+      var response = await http.get(Uri.parse(
+          "http://192.168.1.26:3000/login-user?email=$email&password=$password"));
       var datajson = cnv.jsonDecode(response.body)["results"];
       await prefs.setString('userid', datajson[0]["user_id"]);
       await prefs.setInt("points", datajson[0]["points"]);
@@ -40,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: Container(
         width: double.infinity,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             gradient: LinearGradient(begin: Alignment.topCenter, colors: [
           Color(0xFF6190e8),
           Color(0xFFa7bfe8),
@@ -49,10 +46,10 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            SizedBox(
+            const SizedBox(
               height: 80,
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,20 +68,20 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Expanded(
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(60),
                         topRight: Radius.circular(60))),
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: EdgeInsets.all(30),
+                    padding: const EdgeInsets.all(30),
                     child: Column(
                       children: <Widget>[
-                        SizedBox(
+                        const SizedBox(
                           height: 60,
                         ),
                         Container(
@@ -92,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
                               boxShadow: [
-                                BoxShadow(
+                                const BoxShadow(
                                     color: Color.fromRGBO(0, 100, 255, .2),
                                     blurRadius: 10,
                                     offset: Offset(0, 10))
@@ -100,21 +97,21 @@ class _LoginPageState extends State<LoginPage> {
                           child: Column(
                             children: <Widget>[
                               Container(
-                                padding: EdgeInsets.all(10),
+                                padding: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(
                                     border: Border(
                                         bottom: BorderSide(
                                             color: Colors.grey.shade200))),
                                 child: TextField(
                                   controller: textControllerEmail,
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                       hintText: "Email",
                                       hintStyle: TextStyle(color: Colors.grey),
                                       border: InputBorder.none),
                                 ),
                               ),
                               Container(
-                                padding: EdgeInsets.all(10),
+                                padding: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(
                                     border: Border(
                                         bottom: BorderSide(
@@ -124,7 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                                   obscureText: true,
                                   enableSuggestions: false,
                                   autocorrect: false,
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                       hintText: "Password",
                                       hintStyle: TextStyle(color: Colors.grey),
                                       border: InputBorder.none),
@@ -133,14 +130,14 @@ class _LoginPageState extends State<LoginPage> {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 40,
                         ),
-                        Text(
+                        const Text(
                           "Forgot Password?",
                           style: TextStyle(color: Colors.grey),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         InkWell(
@@ -148,11 +145,11 @@ class _LoginPageState extends State<LoginPage> {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => RegisterPage()));
                             },
-                            child: Text("Register",
+                            child: const Text("Register",
                                 style: TextStyle(
                                     color: Colors.grey,
                                     decoration: TextDecoration.underline))),
-                        SizedBox(
+                        const SizedBox(
                           height: 40,
                         ),
                         ElevatedButton(
@@ -165,7 +162,7 @@ class _LoginPageState extends State<LoginPage> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(32.0)),
 
-                            minimumSize: Size(100, 40), //////// HERE
+                            minimumSize: const Size(100, 40), //////// HERE
                           ),
                           onPressed: () {
                             //postCancelSearch();
@@ -186,7 +183,8 @@ class _LoginPageState extends State<LoginPage> {
                                         SnackBar(content: Text(value)));
                                     Navigator.of(context).pushAndRemoveUntil(
                                         MaterialPageRoute(
-                                            builder: (context) => MyHomePage()),
+                                            builder: (context) =>
+                                                const MyHomePage()),
                                         (Route route) => false);
                                   }()
                                 : () {
@@ -194,17 +192,17 @@ class _LoginPageState extends State<LoginPage> {
                                         SnackBar(content: Text(value)));
                                   }());
                           },
-                          child: Text('Login',
+                          child: const Text('Login',
                               style: TextStyle(fontWeight: FontWeight.bold)),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 50,
                         ),
-                        Text(
+                        const Text(
                           "Continue with social media",
                           style: TextStyle(color: Colors.grey),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 30,
                         ),
                         Row(
@@ -215,7 +213,7 @@ class _LoginPageState extends State<LoginPage> {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(50),
                                     color: Colors.blue),
-                                child: Center(
+                                child: const Center(
                                   child: Text(
                                     "Facebook",
                                     style: TextStyle(
@@ -225,7 +223,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 30,
                             ),
                             Expanded(
@@ -234,7 +232,7 @@ class _LoginPageState extends State<LoginPage> {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(50),
                                     color: Colors.black),
-                                child: Center(
+                                child: const Center(
                                   child: Text(
                                     "Github",
                                     style: TextStyle(

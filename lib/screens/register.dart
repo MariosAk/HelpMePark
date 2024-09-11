@@ -59,7 +59,7 @@ class _RegisterPageState extends State<RegisterPage> {
           return Scaffold(
               body: Container(
             width: double.infinity,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 gradient: LinearGradient(begin: Alignment.topCenter, colors: [
               Color(0xFF6190e8),
               Color(0xFFa7bfe8),
@@ -68,10 +68,10 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SizedBox(
+                const SizedBox(
                   height: 80,
                 ),
-                Padding(
+                const Padding(
                   padding: EdgeInsets.all(20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,27 +90,27 @@ class _RegisterPageState extends State<RegisterPage> {
                     ],
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Expanded(
                   child: Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(60),
                             topRight: Radius.circular(60))),
                     child: SingleChildScrollView(
                       child: Padding(
-                        padding: EdgeInsets.all(30),
+                        padding: const EdgeInsets.all(30),
                         child: Column(
                           children: <Widget>[
-                            SizedBox(
+                            const SizedBox(
                               height: 60,
                             ),
                             Container(
                               decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(10),
-                                  boxShadow: [
+                                  boxShadow: const [
                                     BoxShadow(
                                         color: Color.fromRGBO(0, 100, 255, .2),
                                         blurRadius: 10,
@@ -119,7 +119,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               child: Column(
                                 children: <Widget>[
                                   Container(
-                                    padding: EdgeInsets.all(10),
+                                    padding: const EdgeInsets.all(10),
                                     decoration: BoxDecoration(
                                         border: Border(
                                             bottom: BorderSide(
@@ -134,7 +134,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                         ;
                                       },
                                       controller: textControllerEmail,
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                           hintText: "Email",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
@@ -142,14 +142,14 @@ class _RegisterPageState extends State<RegisterPage> {
                                     ),
                                   ),
                                   Container(
-                                    padding: EdgeInsets.all(10),
+                                    padding: const EdgeInsets.all(10),
                                     decoration: BoxDecoration(
                                         border: Border(
                                             bottom: BorderSide(
                                                 color: Colors.grey.shade200))),
                                     child: TextField(
                                       controller: textControllerPassword,
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                           hintText: "Password",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
@@ -157,8 +157,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                     ),
                                   ),
                                   Container(
-                                    padding: EdgeInsets.all(10),
-                                    child: TextField(
+                                    padding: const EdgeInsets.all(10),
+                                    child: const TextField(
                                       decoration: InputDecoration(
                                           hintText: "Repeat Password",
                                           hintStyle:
@@ -169,7 +169,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ],
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 40,
                             ),
                             ElevatedButton(
@@ -182,13 +182,13 @@ class _RegisterPageState extends State<RegisterPage> {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(32.0)),
 
-                                minimumSize: Size(100, 40), //////// HERE
+                                minimumSize: const Size(100, 40), //////// HERE
                               ),
                               onPressed: () {
                                 //postCancelSearch();
                                 if (!isEmailValid) {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
+                                      const SnackBar(
                                           content: Text(
                                               'Please enter a valid email.')));
                                 } else {
@@ -218,7 +218,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                                       registrationStatus))));
                                 }
                               },
-                              child: Text('Continue',
+                              child: const Text('Continue',
                                   style:
                                       TextStyle(fontWeight: FontWeight.bold)),
                             ),

@@ -22,7 +22,6 @@ import 'notifications_page.dart';
 import 'package:badges/badges.dart' as bdg;
 import 'package:square_percent_indicater/square_percent_indicater.dart';
 import 'package:pasthelwparking_v1/globals.dart' as globals;
-import 'package:pasthelwparking_v1/services/track_changes.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:pasthelwparking_v1/screens/notifications_page.dart'
     as notificationPage;
@@ -67,8 +66,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   Animation<double>? _animation;
 
-  String ApiKey = 'AIzaSyBghQsgXKFjMw5LG79JTmLNgibSc2atYZM';
-  String TomTomApiKey = 'qa5MzxXesmBUxRLaWQnFRmMZ2D33kE7b';
+  String ApiKey = '';
+  String TomTomApiKey = '';
   final _controller = TextEditingController();
   String searchTxt = "";
   String lat = "";

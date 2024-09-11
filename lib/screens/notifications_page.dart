@@ -30,28 +30,28 @@ class _NotificationPageState extends State<NotificationPage> {
     switch (cT) {
       case "Sedan":
         {
-          return AssetImage('Assets/Images/Sedan.png');
+          return const AssetImage('Assets/Images/Sedan.png');
         }
       case "Coupe":
-        return AssetImage('Assets/Images/Coupe.png');
+        return const AssetImage('Assets/Images/Coupe.png');
       case "Pickup":
-        return AssetImage('Assets/Images/Pickup.png');
+        return const AssetImage('Assets/Images/Pickup.png');
       case "Jeep":
-        return AssetImage('Assets/Images/Jeep.png');
+        return const AssetImage('Assets/Images/Jeep.png');
       case "Wagon":
-        return AssetImage('Assets/Images/Wagon.png');
+        return const AssetImage('Assets/Images/Wagon.png');
       case "Crossover":
-        return AssetImage('Assets/Images/Crossover.png');
+        return const AssetImage('Assets/Images/Crossover.png');
       case "Hatchback":
-        return AssetImage('Assets/Images/Hatchback.png');
+        return const AssetImage('Assets/Images/Hatchback.png');
       case "Van":
-        return AssetImage('Assets/Images/Van.png');
+        return const AssetImage('Assets/Images/Van.png');
       case "Sportcoupe":
-        return AssetImage('Assets/Images/Sportcoupe.png');
+        return const AssetImage('Assets/Images/Sportcoupe.png');
       case "SUV":
-        return AssetImage('Assets/Images/SUV.png');
+        return const AssetImage('Assets/Images/SUV.png');
       default:
-        return AssetImage('Assets/Images/Sedan.png');
+        return const AssetImage('Assets/Images/Sedan.png');
     }
   }
 
@@ -64,7 +64,7 @@ class _NotificationPageState extends State<NotificationPage> {
           if (snapshot.connectionState == ConnectionState.done &&
               !snapshot.hasError) {
             return Container(
-                color: Color.fromRGBO(246, 255, 255, 1.0),
+                color: const Color.fromRGBO(246, 255, 255, 1.0),
                 child: SafeArea(
                     child: Scaffold(
                         backgroundColor: Colors.transparent,
@@ -74,10 +74,11 @@ class _NotificationPageState extends State<NotificationPage> {
                           title: Text(
                             "Notifications",
                             style: GoogleFonts.openSans(
-                                textStyle: TextStyle(color: Colors.black)),
+                                textStyle:
+                                    const TextStyle(color: Colors.black)),
                           ),
                           leading: IconButton(
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.arrow_back,
                               color: Colors.black38,
                             ),
@@ -86,7 +87,7 @@ class _NotificationPageState extends State<NotificationPage> {
                           ),
                           actions: [
                             IconButton(
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.delete,
                                 color: Colors.black38,
                               ),
@@ -109,7 +110,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                         alignment:
                                             AlignmentDirectional.centerEnd,
                                         color: Colors.red,
-                                        child: Icon(
+                                        child: const Icon(
                                           Icons.delete,
                                           color: Colors.white,
                                         ),
@@ -138,7 +139,8 @@ class _NotificationPageState extends State<NotificationPage> {
                                                   width: 70.0,
                                                   decoration: BoxDecoration(
                                                       borderRadius:
-                                                          BorderRadius.only(
+                                                          const BorderRadius
+                                                              .only(
                                                               bottomLeft: Radius
                                                                   .circular(5),
                                                               topLeft: Radius
@@ -152,8 +154,9 @@ class _NotificationPageState extends State<NotificationPage> {
                                               Container(
                                                 height: 100,
                                                 child: Padding(
-                                                  padding: EdgeInsets.fromLTRB(
-                                                      10, 2, 0, 0),
+                                                  padding:
+                                                      const EdgeInsets.fromLTRB(
+                                                          10, 2, 0, 0),
                                                   child: Column(
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
@@ -200,7 +203,7 @@ class _NotificationPageState extends State<NotificationPage> {
                 child: Container(
                   width: MediaQuery.of(context).size.width / 1.5,
                   height: MediaQuery.of(context).size.width / 1.5,
-                  child: CircularProgressIndicator(strokeWidth: 10),
+                  child: const CircularProgressIndicator(strokeWidth: 10),
                 ),
               ),
             );

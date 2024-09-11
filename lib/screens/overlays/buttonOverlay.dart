@@ -20,14 +20,15 @@ class _buttonOverlayState extends State<buttonOverlay> {
                   height: MediaQuery.of(context).size.height / 2,
                   width: MediaQuery.of(context).size.width / 1.3,
                   decoration: BoxDecoration(
-                    color: Color.fromRGBO(225, 235, 235, 1.0),
+                    color: const Color.fromRGBO(225, 235, 235, 1.0),
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.5),
                         spreadRadius: 2,
                         blurRadius: 7,
-                        offset: Offset(0, 3), // changes position of shadow
+                        offset:
+                            const Offset(0, 3), // changes position of shadow
                       ),
                     ],
                   ),
@@ -44,7 +45,7 @@ class _buttonOverlayState extends State<buttonOverlay> {
                   elevation: 3,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(32.0)),
-                  minimumSize: Size(100, 40),
+                  minimumSize: const Size(100, 40),
                 ),
                 onPressed: () =>
                     {Navigator.pop(context), globals.heroOverlay = false},

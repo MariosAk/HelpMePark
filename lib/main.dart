@@ -7,7 +7,6 @@ import 'package:pasthelwparking_v1/screens/claim.dart';
 import 'package:pasthelwparking_v1/screens/enableLocation.dart';
 import 'package:pasthelwparking_v1/screens/login.dart';
 import 'package:pasthelwparking_v1/services/push_notification_service.dart';
-import 'package:pasthelwparking_v1/services/track_changes.dart';
 import 'screens/home_page.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -397,7 +396,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
 
   Future _getDevToken() async {
     fcm_token = await FirebaseMessaging.instance.getToken();
-    print("DEV TOKEN FIREBASE CLOUD MESSAGING -> $fcm_token"); 
+    print("DEV TOKEN FIREBASE CLOUD MESSAGING -> $fcm_token");
   }
 
   @override

@@ -37,18 +37,6 @@ class _LeavingPageState extends State<Leaving> {
     }
   }
 
-  postInsertTime() async {
-    try {
-      var response = await http.post(
-          Uri.parse(
-              "https://pasthelwparkingv1.000webhostapp.com/php/insert_time.php"),
-          body: {"time": '$notifReceiveTime', "uid": '$token'});
-      print(response.body);
-    } catch (e) {
-      print(e);
-    }
-  }
-
   checkForInitialState() async {
     FirebaseMessaging.instance
         .getInitialMessage()
