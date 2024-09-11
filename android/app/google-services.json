@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "713135664965",
+    "project_id": "pasthelwparking",
+    "storage_bucket": "pasthelwparking.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:713135664965:android:2934f4c3550354951dd82c",
+        "android_client_info": {
+          "package_name": "com.example.pasthelwparking_v1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "713135664965-qktjrde34ge8n9pj0et5chm3lrh787t3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqTzLUWWRNoAQYFE-9k6gZFbpHx4d9DXQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "713135664965-qktjrde34ge8n9pj0et5chm3lrh787t3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "713135664965-mlfnq0bgrvcdsu28iajfpknev5racbdo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.pasthelwparkingV1"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
