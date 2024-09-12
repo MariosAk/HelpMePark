@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:overlay_support/overlay_support.dart';
-import 'package:pasthelwparking_v1/screens/parking_location.dart';
-import 'package:pasthelwparking_v1/screens/claim.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:pasthelwparking_v1/pushnotificationModel.dart';
+import 'package:pasthelwparking_v1/model/pushnotificationModel.dart';
 import 'package:http/http.dart' as http;
-import 'package:device_info_plus/device_info_plus.dart';
-import 'dart:io';
 
 class Leaving extends StatefulWidget {
   @override
@@ -16,8 +10,7 @@ class Leaving extends StatefulWidget {
 }
 
 class _LeavingPageState extends State<Leaving> {
-  late final FirebaseMessaging _messaging;
-  PushNotification? _notificationInfo, notification;
+  PushNotification? notification;
   String? token;
   DateTime? notifReceiveTime;
 
@@ -26,24 +19,13 @@ class _LeavingPageState extends State<Leaving> {
     print("DEV TOKEN FIREBASE CLOUD MESSAGING -> $token");
   }
 
-  Future<String?> _getId() async {
-    var deviceInfo = DeviceInfoPlugin();
-    if (Platform.isIOS) {
-      var iosDeviceInfo = await deviceInfo.iosInfo;
-      return iosDeviceInfo.identifierForVendor; // unique ID on iOS
-    } else if (Platform.isAndroid) {
-      var androidDeviceInfo = await deviceInfo.androidInfo;
-      return androidDeviceInfo.androidId; // unique ID on Android
-    }
-  }
-
   checkForInitialState() async {
     FirebaseMessaging.instance
         .getInitialMessage()
         .then((RemoteMessage? initialMessage) {
       print('initialMessage data: ${initialMessage?.data}');
       if (initialMessage != null) {
-        PushNotification notification = PushNotification(
+        PushNotification(
           title: initialMessage.notification?.title,
           body: initialMessage.notification?.body,
         );

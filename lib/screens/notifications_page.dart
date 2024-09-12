@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../model/notifications.dart';
-import '../SqliteService.dart';
+import '../services/SqliteService.dart';
 
 class NotificationPage extends StatefulWidget {
   @override
@@ -15,6 +15,8 @@ class _NotificationPageState extends State<NotificationPage> {
 
   @override
   void initState() {
+    super.initState();
+
     //notifications = this.getNotificationsList();
   }
 

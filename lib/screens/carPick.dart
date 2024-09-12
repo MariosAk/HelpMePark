@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:pasthelwparking_v1/screens/home_page.dart';
 import 'package:pasthelwparking_v1/main.dart';
 
 class Car {
@@ -10,7 +9,7 @@ class Car {
 }
 
 class CarPick extends StatefulWidget {
-  String? email;
+  final String? email;
   CarPick(this.email);
   @override
   _CarPickState createState() => _CarPickState();

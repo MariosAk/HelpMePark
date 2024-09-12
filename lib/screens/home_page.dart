@@ -4,25 +4,21 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:mysql1/mysql1.dart';
-import 'package:pasthelwparking_v1/pushnotificationModel.dart';
+import 'package:pasthelwparking_v1/model/pushnotificationModel.dart';
 import 'package:http/http.dart' as http;
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:pasthelwparking_v1/screens/claim.dart';
-import 'package:pasthelwparking_v1/services/push_notification_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:show_up_animation/show_up_animation.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'dart:convert' as cnv;
 import 'overlays/buttonOverlay.dart';
 import 'overlays/buttonOverlayRight.dart';
-import 'notifications_page.dart';
 import 'package:badges/badges.dart' as bdg;
 import 'package:square_percent_indicater/square_percent_indicater.dart';
 import 'package:pasthelwparking_v1/globals.dart' as globals;
-import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:pasthelwparking_v1/screens/notifications_page.dart'
     as notificationPage;
 
@@ -38,11 +34,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
-  late final FirebaseMessaging _messaging;
-  PushNotification? _notificationInfo, notification;
+  PushNotification? notification;
   String? token, address;
   DateTime? notifReceiveTime;
-  Position? _currentPosition;
   double height = 100;
 
   double width = 100;
@@ -54,8 +48,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   bool showGifLeaving = false;
 
   bool leaving = false;
-
-  bool _isLoading = false;
 
   bool isSelected = false;
   bool _searchingTextfield = false;
@@ -75,7 +67,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   MapController _mapctl = MapController();
   TextEditingController textController = TextEditingController();
 
-  StreamController<Results> _streamController = StreamController<Results>();
   int value = 0;
   late Timer timer;
   late int leavingsCountNew;
@@ -152,7 +143,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   updateUserId(obj) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var response = http.put(Uri.parse("http://192.168.1.26:3000/update-userid"),
+    http.put(Uri.parse("http://192.168.1.26:3000/update-userid"),
         body: cnv.jsonEncode({
           "user_id": obj['userIDForCache'],
           "email": prefs.getString("email")
@@ -197,9 +188,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     // continue accessing the position of the device.
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
-    setState(() {
-      _currentPosition = position;
-    });
+    setState(() {});
   }
 
   Future<String> addSearching() async {
@@ -254,14 +243,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     final prefs = await SharedPreferences.getInstance();
     var userId = prefs.getString('userid');
     try {
-      var response =
-          http.post(Uri.parse("http://192.168.1.26:3000/update-center"),
-              body: cnv.jsonEncode({
-                "lat": widget.latitude.toString(),
-                "long": widget.longitude.toString(),
-                "user_id": userId
-              }),
-              headers: {"Content-Type": "application/json"});
+      http.post(Uri.parse("http://192.168.1.26:3000/update-center"),
+          body: cnv.jsonEncode({
+            "lat": widget.latitude.toString(),
+            "long": widget.longitude.toString(),
+            "user_id": userId
+          }),
+          headers: {"Content-Type": "application/json"});
     } catch (e) {
       print(e);
     }
@@ -304,7 +292,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     var encstr = Uri.encodeComponent(value);
     var response = await http.get(Uri.parse(
         'https://api.tomtom.com/search/2/search/$encstr.json?key=$TomTomApiKey&language=el-GR&limit=4&typeahead=true&countrySet=GR&idxSet=POI,PAD,Addr,Str'));
-    var data = "[" + response.body + "]";
     var datajson = cnv.jsonDecode(response.body)["results"];
     for (var i = 0; i < datajson.length; i++) {
       /*var pair = {
@@ -319,16 +306,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final items = <Widget>[
-      const Icon(
-        Icons.home,
-        size: 30,
-        color: Colors.white,
-      ),
-      const Icon(Icons.person, size: 30, color: Colors.white),
-      const Icon(Icons.notifications, size: 30, color: Colors.white),
-      const Icon(Icons.logout, size: 30, color: Colors.white),
-    ];
     return Container(
         color: const Color.fromRGBO(246, 255, 255, 1.0),
         child: SafeArea(

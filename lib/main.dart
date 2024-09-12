@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:overlay_support/overlay_support.dart';
-import 'package:pasthelwparking_v1/screens/parking_location.dart';
 import 'package:pasthelwparking_v1/screens/claim.dart';
 import 'package:pasthelwparking_v1/screens/enableLocation.dart';
 import 'package:pasthelwparking_v1/screens/login.dart';
@@ -11,17 +10,13 @@ import 'screens/home_page.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-import 'package:pasthelwparking_v1/pushnotificationModel.dart';
+import 'package:pasthelwparking_v1/model/pushnotificationModel.dart';
 import 'package:http/http.dart' as http;
-import 'package:device_info_plus/device_info_plus.dart';
-import 'dart:io';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_overlay/flutter_overlay.dart';
 import 'dart:convert' as cnv;
 import 'model/notifications.dart';
-import 'SqliteService.dart';
+import 'services/SqliteService.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
@@ -65,8 +60,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
   //initialize firebase values
   late final FirebaseMessaging _messaging;
-  PushNotification? _notificationInfo, notification;
-  static String id = '';
+  PushNotification? notification;
   String? token, address, fcm_token;
   DateTime? notifReceiveTime;
   Position? _currentPosition;
@@ -82,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
 
   bool showGifLeaving = false;
 
-  late Future _getPosition, _getAddress, _getToken, _getSP;
+  late Future _getPosition;
 
   OverlayState? overlayState;
 
@@ -146,7 +140,6 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
           ntf.time = message.data["time"];
           ntf.status = "Pending";
           ntf.entry_id = message.data["id"].toString();
-          id = await sqliteService.createItem(ntf);
           //_show(message.data, token);
           setState(() {});
         }
@@ -158,18 +151,6 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
 
   Future notificationsCount() async {
     count = await SqliteService().getNotificationCount();
-  }
-
-  Future<String?> _getId() async {
-    var deviceInfo = DeviceInfoPlugin();
-    if (Platform.isIOS) {
-      // import 'dart:io'
-      var iosDeviceInfo = await deviceInfo.iosInfo;
-      return iosDeviceInfo.identifierForVendor; // unique ID on iOS
-    } else if (Platform.isAndroid) {
-      var androidDeviceInfo = await deviceInfo.androidInfo;
-      return androidDeviceInfo.androidId; // unique ID on Android
-    }
   }
 
   postInsertTime() async {
@@ -204,7 +185,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
           Uri.parse("http://192.168.1.26:3000/get-userid"),
           body: cnv.jsonEncode({"email": email.toString()}),
           headers: {"Content-Type": "application/json"});
-      if (response.body != null) {
+      if (response.body.isNotEmpty) {
         var decoded = cnv.jsonDecode(response.body);
         token = decoded["user_id"];
       }
@@ -218,8 +199,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
       await getUserID();
       await _getDevToken();
       var userId = token;
-      var response = http.post(
-          Uri.parse("http://192.168.1.26:3000/register-fcmToken"),
+      http.post(Uri.parse("http://192.168.1.26:3000/register-fcmToken"),
           body: cnv.jsonEncode({
             "user_id": userId.toString(),
             "fcm_token": fcm_token.toString()
@@ -271,7 +251,6 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     _getPosition = _determinePosition();
-    _getSP = sharedPref();
     registerNotification();
     overlayState = Overlay.of(context);
     _toggleServiceStatusStream();
@@ -280,7 +259,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
   @override
   void dispose() {
     // Remove the observer
-    WidgetsBinding.instance!.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
@@ -312,6 +291,9 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
       case AppLifecycleState.detached:
         // widget is detached
         print("???detached");
+        break;
+      case AppLifecycleState.hidden:
+        // TODO: Handle this case.
         break;
     }
   }

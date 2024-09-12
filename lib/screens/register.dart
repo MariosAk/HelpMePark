@@ -131,7 +131,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                         EmailValidator.validate(value!)
                                             ? isEmailValid = true
                                             : isEmailValid = false;
-                                        ;
+                                        return null;
                                       },
                                       controller: textControllerEmail,
                                       decoration: const InputDecoration(

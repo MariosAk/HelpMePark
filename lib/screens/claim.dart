@@ -1,8 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:pasthelwparking_v1/main.dart';
-import 'package:pasthelwparking_v1/screens/home_page.dart';
 import 'package:pasthelwparking_v1/screens/parking_location.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as cnv;
@@ -11,9 +9,9 @@ import 'package:pasthelwparking_v1/globals.dart' as globals;
 
 class ClaimPage extends StatefulWidget {
   Map? data;
-  String carType, userID, time;
-  int latestLeavingID, times_skipped;
-  double latitude, longitude;
+  final String carType, userID, time;
+  final int latestLeavingID, times_skipped;
+  final double latitude, longitude;
   ClaimPage(this.latestLeavingID, this.userID, this.latitude, this.longitude,
       this.carType, this.times_skipped, this.time);
   @override

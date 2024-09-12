@@ -3,8 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:pasthelwparking_v1/main.dart';
-import 'package:pasthelwparking_v1/globals.dart';
 
 class EnableLocation extends StatelessWidget {
   @override

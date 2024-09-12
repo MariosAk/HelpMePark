@@ -11,8 +11,7 @@ cancelSearch() async {
   final prefs = await SharedPreferences.getInstance();
   var userId = prefs.getString('userid');
   try {
-    var response = await http.delete(
-        Uri.parse("http://192.168.1.26:3000/cancel-search"),
+    await http.delete(Uri.parse("http://192.168.1.26:3000/cancel-search"),
         body: cnv.jsonEncode({"user_id": userId}),
         headers: {"Content-Type": "application/json"});
   } catch (e) {
@@ -22,8 +21,7 @@ cancelSearch() async {
 
 deleteLeaving(int latestLeavingID) async {
   try {
-    var response = await http.delete(
-        Uri.parse("http://192.168.1.26:3000/delete-leaving"),
+    await http.delete(Uri.parse("http://192.168.1.26:3000/delete-leaving"),
         body: cnv.jsonEncode({"leavingID": latestLeavingID}),
         headers: {"Content-Type": "application/json"});
   } catch (e) {
@@ -33,16 +31,15 @@ deleteLeaving(int latestLeavingID) async {
 
 postSkip(timesSkipped, time, latitude, longitude, latestLeavingID) async {
   try {
-    var response =
-        await http.post(Uri.parse("http://192.168.1.26:3000/parking-skipped"),
-            body: cnv.jsonEncode({
-              "times_skipped": timesSkipped,
-              "time": time,
-              "latitude": latitude,
-              "longitude": longitude,
-              "latestLeavingID": latestLeavingID
-            }),
-            headers: {"Content-Type": "application/json"});
+    await http.post(Uri.parse("http://192.168.1.26:3000/parking-skipped"),
+        body: cnv.jsonEncode({
+          "times_skipped": timesSkipped,
+          "time": time,
+          "latitude": latitude,
+          "longitude": longitude,
+          "latestLeavingID": latestLeavingID
+        }),
+        headers: {"Content-Type": "application/json"});
   } catch (e) {}
 }
 
@@ -50,8 +47,7 @@ getPoints() async {
   final prefs = await SharedPreferences.getInstance();
   var userId = prefs.getString('userid');
   try {
-    var response = await http.post(
-        Uri.parse("http://192.168.1.26:3000/get-points"),
+    await http.post(Uri.parse("http://192.168.1.26:3000/get-points"),
         body: cnv.jsonEncode({"user_id": userId}),
         headers: {"Content-Type": "application/json"});
   } catch (e) {
@@ -63,8 +59,7 @@ updatePoints(int? updatedPoints) async {
   final prefs = await SharedPreferences.getInstance();
   var userId = prefs.getString('userid');
   try {
-    var response = await http.post(
-        Uri.parse("http://192.168.1.26:3000/update-points"),
+    await http.post(Uri.parse("http://192.168.1.26:3000/update-points"),
         body: cnv.jsonEncode({"user_id": userId, "points": updatedPoints}),
         headers: {"Content-Type": "application/json"});
   } catch (e) {

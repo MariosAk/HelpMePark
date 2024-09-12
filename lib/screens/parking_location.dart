@@ -9,11 +9,11 @@ import 'package:pasthelwparking_v1/globals.dart' as globals;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ParkingLocation extends StatefulWidget {
-  Map? data;
-  double latitude;
-  double longitude;
-  String userID;
-  int times_skipped, latestLeavingID;
+  final Map? data;
+  final double latitude;
+  final double longitude;
+  final String userID;
+  final int times_skipped, latestLeavingID;
   ParkingLocation(this.times_skipped, this.data, this.latitude, this.longitude,
       this.userID, this.latestLeavingID);
   @override
@@ -45,7 +45,6 @@ class _ParkingLocationState extends State<ParkingLocation>
   }
 
   Set<Marker> markers = {};
-  Position? _currentPosition;
 
   ValueNotifier<bool> isDialOpen = ValueNotifier(false);
 
@@ -83,11 +82,9 @@ class _ParkingLocationState extends State<ParkingLocation>
 
     // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-    setState(() {
-      if (position != null) _currentPosition = position;
-    });
+    // Position position = await Geolocator.getCurrentPosition(
+    // desiredAccuracy: LocationAccuracy.high);
+    setState(() {});
   }
 
   void _showOverlay(BuildContext context) async {
@@ -109,7 +106,6 @@ class _ParkingLocationState extends State<ParkingLocation>
                       setState(() {});
                     },
                   ))));
-      ;
     });
 
     // Inserting the OverlayEntry into the Overlay
@@ -126,7 +122,6 @@ class _ParkingLocationState extends State<ParkingLocation>
   Future getRoute() async {
     var response = await http.get(Uri.parse(
         'https://api.tomtom.com/routing/1/calculateRoute/${widget.latitude.toString()},${widget.longitude.toString()}:${widget.data!["lat"]},${widget.data?["long"]}/json?travelMode=car&computeBestOrder=true&routeType=shortest&sectionType=travelMode&key=$TomTomApiKey'));
-    var data = "[" + response.body + "]";
     var datajson =
         cnv.jsonDecode(response.body)["routes"][0]["legs"][0]["points"];
     for (var i = 0; i < datajson.length; i++) {
@@ -136,7 +131,7 @@ class _ParkingLocationState extends State<ParkingLocation>
 
   postNewParking(int clicked) async {
     try {
-      var response = await http.post(
+      await http.post(
           Uri.parse(
               "https://pasthelwparkingv1.000webhostapp.com/php/new_parking.php"),
           body: {
