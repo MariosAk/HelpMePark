@@ -18,7 +18,7 @@ import 'overlays/buttonOverlay.dart';
 import 'overlays/buttonOverlayRight.dart';
 import 'package:badges/badges.dart' as bdg;
 import 'package:square_percent_indicater/square_percent_indicater.dart';
-import 'package:pasthelwparking_v1/globals.dart' as globals;
+import 'package:pasthelwparking_v1/services/globals.dart' as globals;
 import 'package:pasthelwparking_v1/screens/notifications_page.dart'
     as notificationPage;
 
@@ -259,8 +259,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     try {
       var response = await http.post(
           //Uri.parse("http://192.168.1.26:8080/pasthelwparking/searching.php"), //vm
-          Uri.parse(
-              "https://pasthelwparkingv1.000webhostapp.com/php/itExists.php"),
+          Uri.parse("http://192.168.1.26:3000/update-center"),
           body: {
             "user_id": userid,
           });

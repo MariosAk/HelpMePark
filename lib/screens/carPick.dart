@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pasthelwparking_v1/main.dart';
+import 'dart:convert' as cnv;
 
 class Car {
   Image image;
@@ -19,17 +20,15 @@ class _CarPickState extends State<CarPick> {
   int tappedIndex = 100;
   List<bool> borders = [];
 
-  Future<String> registerCar(car, email) async {
+  registerCar(String carType, String? email) async {
     try {
       var response = await http.post(
-          Uri.parse(
-              "https://pasthelwparkingv1.000webhostapp.com/php/registerCar.php"),
-          body: {"email": email, "car": car});
-      //print("LATLON " + response.body);
-      return response.body;
+          Uri.parse("http://192.168.1.26:3000/register-car"),
+          body: cnv.jsonEncode({"carType": carType, "email": email}),
+          headers: {"Content-Type": "application/json"});
+      print(response.body);
     } catch (e) {
       print(e);
-      return e.toString();
     }
   }
 

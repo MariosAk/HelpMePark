@@ -5,7 +5,7 @@ import 'package:pasthelwparking_v1/screens/parking_location.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as cnv;
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pasthelwparking_v1/globals.dart' as globals;
+import 'package:pasthelwparking_v1/services/globals.dart' as globals;
 
 class ClaimPage extends StatefulWidget {
   Map? data;

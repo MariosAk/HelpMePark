@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pasthelwparking_v1/globals.dart' as globals;
+import 'package:pasthelwparking_v1/services/globals.dart' as globals;
 
 class buttonOverlay extends StatefulWidget {
   @override

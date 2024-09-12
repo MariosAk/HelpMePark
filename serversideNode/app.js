@@ -399,6 +399,37 @@ app.post('/update-points', (req, res) => {
   }
   catch{}
 });
+
+app.post('/register-car', (req, res) => {
+  try{
+    const { carType, email } = req.body;
+    connection.query('UPDATE users SET carType=? WHERE email = ?', [carType, email], (err, result) => {
+      if (err) {
+        console.error('Error registering car: ', err);
+        res.status(500).send('Error registering car');
+        return;
+      }
+      res.send('Car registered successfully');
+    });
+  }
+  catch{}
+});
+
+app.post('/userid-exists', (req, res) => {
+  try{
+    const { user_id } = req.body;
+    connection.query("SELECT * FROM leaving WHERE user_id=?", [user_id], (err, result) => {
+      if (err) {
+        console.error('Error finding user ', err);
+        res.status(500).send('EError finding user');
+        return;
+      }
+      res.send('User found successfully');
+    });
+  }
+  catch{}
+});
+
 // Start the server
 server.listen(port, () => {
   console.log(`Server listening on port ${port}`);

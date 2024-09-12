@@ -5,7 +5,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as cnv;
-import 'package:pasthelwparking_v1/globals.dart' as globals;
+import 'package:pasthelwparking_v1/services/globals.dart' as globals;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ParkingLocation extends StatefulWidget {
