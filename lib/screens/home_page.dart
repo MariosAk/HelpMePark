@@ -257,12 +257,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   useridExists(userid) async {
     try {
-      var response = await http.post(
-          //Uri.parse("http://192.168.1.26:8080/pasthelwparking/searching.php"), //vm
-          Uri.parse("http://192.168.1.26:3000/userid-exists"),
-          body: {
-            "user_id": userid,
-          });
+      var response = await http
+          .post(Uri.parse("http://192.168.1.26:3000/userid-exists"), body: {
+        "user_id": userid,
+      });
       var data = response.body;
       return data;
     } catch (e) {
