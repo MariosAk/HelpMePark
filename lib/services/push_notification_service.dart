@@ -310,10 +310,10 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
+      body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const <Widget>[
+          children: <Widget>[
             Text(
               'Push the buttons below to create new notifications',
             ),
@@ -365,8 +365,7 @@ class _MyHomePageState extends State<MyHomePage> {
 ///  *********************************************
 ///
 class NotificationPage extends StatelessWidget {
-  const NotificationPage({Key? key, required this.receivedAction})
-      : super(key: key);
+  const NotificationPage({super.key, required this.receivedAction});
 
   final ReceivedAction receivedAction;
 

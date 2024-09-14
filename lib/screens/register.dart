@@ -5,6 +5,8 @@ import 'package:pasthelwparking_v1/screens/carPick.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
+
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
@@ -17,12 +19,12 @@ class _RegisterPageState extends State<RegisterPage> {
   late String registrationStatus;
   String? token;
 
-  Future<String> registerUser(email, password, _token) async {
+  Future<String> registerUser(email, password, token) async {
     try {
       var response = await http.post(
           //Uri.parse("http://192.168.1.26:8080/pasthelwparking/searching.php"), //vm
           Uri.parse("https://pasthelwparkingv1.000webhostapp.com/php/register.php"),
-          body: {"email": email, "password": password, "token": _token});
+          body: {"email": email, "password": password, "token": token});
       //print("LATLON " + response.body);
       registrationStatus = response.body;
       if (registrationStatus.contains("successful")) {

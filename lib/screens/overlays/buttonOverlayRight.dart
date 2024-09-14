@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class buttonOverlayRight extends StatefulWidget {
+  const buttonOverlayRight({super.key});
+
   @override
   _buttonOverlayRightState createState() => _buttonOverlayRightState();
 }
@@ -10,8 +12,8 @@ class _buttonOverlayRightState extends State<buttonOverlayRight> {
   @override
   void initState() {
     super.initState();
-    assetImage = AssetImage('Assets/Images/done1.gif');
-    Future.delayed(Duration(seconds: 4), () {
+    assetImage = const AssetImage('Assets/Images/done1.gif');
+    Future.delayed(const Duration(seconds: 4), () {
       Navigator.pop(context);
     });
   }
@@ -35,14 +37,14 @@ class _buttonOverlayRightState extends State<buttonOverlayRight> {
                 height: MediaQuery.of(context).size.height / 2,
                 width: MediaQuery.of(context).size.width / 1.3,
                 decoration: BoxDecoration(
-                  color: Color.fromRGBO(225, 235, 235, 1.0),
+                  color: const Color.fromRGBO(225, 235, 235, 1.0),
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 7,
-                      offset: Offset(0, 3), // changes position of shadow
+                      offset: const Offset(0, 3), // changes position of shadow
                     ),
                   ],
                 ),

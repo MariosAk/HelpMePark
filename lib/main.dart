@@ -34,7 +34,7 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginPage(),
+      home: const LoginPage(),
       //home: MyDatabase(),
       //home: IntroScreen(),
     ));
@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+  const MyHomePage({super.key});
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
@@ -272,11 +272,11 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
         print("???resumed");
         if (serviceStatusValue == 'enabled') {
           Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (context) => MyHomePage()),
+              MaterialPageRoute(builder: (context) => const MyHomePage()),
               (Route route) => false);
         } else {
           Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (context) => EnableLocation()),
+              MaterialPageRoute(builder: (context) => const EnableLocation()),
               (Route route) => false);
         }
         break;
@@ -395,7 +395,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
           if (snapshot.connectionState == ConnectionState.done &&
               !snapshot.hasError) {
             if (entered == null || entered == false) {
-              return LoginPage();
+              return const LoginPage();
             } else {
               return HomePage(address, token, _currentPosition!.latitude,
                   _currentPosition!.longitude, count);
@@ -405,14 +405,14 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
           // Future with some errors
           else if (snapshot.connectionState == ConnectionState.done &&
               snapshot.hasError) {
-            return EnableLocation();
+            return const EnableLocation();
           } else {
             return Scaffold(
               body: Center(
-                child: Container(
+                child: SizedBox(
                   width: MediaQuery.of(context).size.width / 1.5,
                   height: MediaQuery.of(context).size.width / 1.5,
-                  child: CircularProgressIndicator(strokeWidth: 10),
+                  child: const CircularProgressIndicator(strokeWidth: 10),
                 ),
               ),
             );

@@ -138,7 +138,7 @@ app.get('/login-user', (req, res) => {
   try{
     const email = req.query.email;
     const password = req.query.password;
-    connection.query('SELECT user_id, carType, points FROM users WHERE email=? AND password=?', [email, password], (err, results) => {
+    connection.query('SELECT user_id, carType FROM users WHERE email=? AND password=?', [email, password], (err, results) => {
       if (err || !results[0].user_id) {
         console.error('Error at login: ', err);
         res.status(401).send('Error authenticating user.');

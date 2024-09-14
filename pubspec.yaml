@@ -36,43 +36,43 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
 
-  geolocator: ^9.0.2
-  flutter_map: ^1.0.0
-  latlong2: ^0.8.1
-  http: ^0.13.4
-  firebase_messaging: ^14.2.1
-  firebase_core: ^2.4.1
+  geolocator: ^13.0.1
+  flutter_map: ^7.0.2
+  latlong2: ^0.9.1
+  http: ^1.2.2
+  firebase_messaging: ^15.1.1
+  firebase_core: ^3.4.1
   overlay_support: ^2.0.1
-  device_info_plus: ^3.2.4
+  device_info_plus: ^10.1.2
   curved_navigation_bar:
   introduction_screen:
-  geocoding: ^2.0.5
+  geocoding: ^3.0.0
   avatar_glow:
   clickable_list_wheel_view:
   google_fonts:
-  permission_handler: ^9.2.0
+  permission_handler: ^11.3.1
   show_up_animation:
-  flutter_google_places_hoc081098: ^1.0.0-nullsafety.5
-  flutter_typeahead: ^3.0.0-nullsafety.0
+  flutter_google_places_hoc081098: ^2.0.0
+  flutter_typeahead: ^4.8.0
   flutter_portal: ^1.1.1
   flutter_overlay: ^1.0.0
   flutter_dotenv: ^5.0.2
   sqflite:
   path:
   shared_preferences: ^2.2.1
-  email_validator: ^2.1.16
+  email_validator: ^3.0.0
   flutter_native_splash: ^2.0.1
   square_percent_indicater:
   square_progress_bar:  
-  location: ^4.4.0
+  location: ^6.0.2
   mysql1: ^0.20.0
   badges: ^3.1.2
-  web_socket_channel: ^2.4.0
-  awesome_notifications: ^0.7.4+1
-  uuid: ^3.0.7
+  web_socket_channel: ^3.0.1
+  awesome_notifications: ^0.9.3+1
+  uuid: ^4.5.0
   flutter_cache: ^0.1.0
-  flutter_cache_manager: ^3.3.1
-  firebase_analytics: ^10.4.5
+  flutter_cache_manager: ^3.4.1
+  firebase_analytics: ^11.3.1
 
 dependency_overrides:
     package_info_plus: any
@@ -86,7 +86,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  flutter_lints: ^4.0.0
 
 flutter_native_splash:
   color: "ffffff"

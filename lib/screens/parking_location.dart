@@ -14,8 +14,8 @@ class ParkingLocation extends StatefulWidget {
   final double longitude;
   final String userID;
   final int times_skipped, latestLeavingID;
-  ParkingLocation(this.times_skipped, this.data, this.latitude, this.longitude,
-      this.userID, this.latestLeavingID);
+  const ParkingLocation(this.times_skipped, this.data, this.latitude, this.longitude,
+      this.userID, this.latestLeavingID, {super.key});
   @override
   _ParkingLocationState createState() => _ParkingLocationState();
 }
@@ -35,7 +35,7 @@ class _ParkingLocationState extends State<ParkingLocation>
   void initState() {
     overlayState = Overlay.of(context);
     _animationController =
-        AnimationController(vsync: this, duration: Duration(seconds: 1));
+        AnimationController(vsync: this, duration: const Duration(seconds: 1));
     _animation = Tween<double>(begin: 0.1, end: 2.2).animate(
         CurvedAnimation(parent: _animationController!, curve: Curves.easeIn));
     super.initState();
@@ -101,7 +101,7 @@ class _ParkingLocationState extends State<ParkingLocation>
                   scale: _animation!,
                   child: FloatingActionButton(
                     backgroundColor: Colors.green,
-                    child: Icon(Icons.done),
+                    child: const Icon(Icons.done),
                     onPressed: () {
                       setState(() {});
                     },
@@ -112,7 +112,7 @@ class _ParkingLocationState extends State<ParkingLocation>
     overlayState?.insert(overlayEntry);
 
     // Awaiting for 3 seconds
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 3));
 
     // Removing the OverlayEntry from the Overlay
     overlayEntry.remove();
@@ -175,7 +175,7 @@ class _ParkingLocationState extends State<ParkingLocation>
                     closeManually: true,
                     children: [
                       SpeedDialChild(
-                          child: Icon(Icons.sync),
+                          child: const Icon(Icons.sync),
                           label: 'New parking',
                           onTap: () {
                             newParkingClicked++;
@@ -184,7 +184,7 @@ class _ParkingLocationState extends State<ParkingLocation>
                             Navigator.pop(context, 'close');
                           }),
                       SpeedDialChild(
-                          child: Icon(Icons.done),
+                          child: const Icon(Icons.done),
                           label: 'Parked',
                           onTap: () async {
                             final prefs = await SharedPreferences.getInstance();
@@ -205,17 +205,17 @@ class _ParkingLocationState extends State<ParkingLocation>
                           Flexible(
                               child: FlutterMap(
                             options: MapOptions(
-                                center: LatLng(
+                                initialCenter: LatLng(
                                     double.parse(widget.data?["lat"]),
                                     double.parse(widget.data?["long"])),
-                                zoom: 16),
-                            layers: [
-                              TileLayerOptions(
+                                initialZoom: 16),
+                            children: [
+                              TileLayer(
                                 urlTemplate:
                                     "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                                subdomains: ['a', 'b', 'c'],
+                                subdomains: const ['a', 'b', 'c'],
                               ),
-                              MarkerLayerOptions(
+                              MarkerLayer(
                                 markers: [
                                   Marker(
                                     width: 80.0,
@@ -223,20 +223,19 @@ class _ParkingLocationState extends State<ParkingLocation>
                                     point: LatLng(
                                         double.parse(widget.data?["lat"]),
                                         double.parse(widget.data?["long"])),
-                                    builder: (ctx) =>
-                                        Icon(Icons.pin_drop, color: Colors.red),
+                                    child:
+                                        const Icon(Icons.pin_drop, color: Colors.red),
                                   ),
                                   Marker(
                                     width: 80.0,
                                     height: 80.0,
                                     point: LatLng(lati, widget.longitude),
-                                    builder: (ctx) =>
-                                        Icon(Icons.pin_drop, color: Colors.red),
+                                    child:
+                                        const Icon(Icons.pin_drop, color: Colors.red),
                                   ),
                                 ],
                               ),
-                              PolylineLayerOptions(
-                                polylineCulling: false,
+                              PolylineLayer(
                                 polylines: [
                                   Polyline(
                                     strokeWidth: 3.0,
@@ -264,10 +263,10 @@ class _ParkingLocationState extends State<ParkingLocation>
             //print(snapshot.connectionState);
             return Scaffold(
               body: Center(
-                child: Container(
+                child: SizedBox(
                   width: MediaQuery.of(context).size.width / 1.5,
                   height: MediaQuery.of(context).size.width / 1.5,
-                  child: CircularProgressIndicator(strokeWidth: 10),
+                  child: const CircularProgressIndicator(strokeWidth: 10),
                 ),
               ),
             );

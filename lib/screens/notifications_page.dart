@@ -4,6 +4,8 @@ import '../model/notifications.dart';
 import '../services/SqliteService.dart';
 
 class NotificationPage extends StatefulWidget {
+  const NotificationPage({super.key});
+
   @override
   _NotificationPageState createState() => _NotificationPageState();
 }
@@ -99,7 +101,7 @@ class _NotificationPageState extends State<NotificationPage> {
                           centerTitle: true,
                         ),
                         body: Center(
-                            child: Container(
+                            child: SizedBox(
                           height: MediaQuery.of(context).size.height,
                           child: snapshot.data!.isNotEmpty
                               ? ListView.builder(
@@ -132,7 +134,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                       direction: DismissDirection.endToStart,
                                       child: Card(
                                         elevation: 5,
-                                        child: Container(
+                                        child: SizedBox(
                                           height: 100.0,
                                           child: Row(
                                             children: <Widget>[
@@ -153,7 +155,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                                               snapshot
                                                                   .data![index]
                                                                   .carType)))),
-                                              Container(
+                                              SizedBox(
                                                 height: 100,
                                                 child: Padding(
                                                   padding:
@@ -164,7 +166,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                                         CrossAxisAlignment
                                                             .start,
                                                     children: <Widget>[
-                                                      Container(
+                                                      SizedBox(
                                                           width: 260,
                                                           child: Text(
                                                             "Address: ${snapshot.data![index].address.toString()}",
@@ -202,7 +204,7 @@ class _NotificationPageState extends State<NotificationPage> {
             //print(snapshot.connectionState);
             return Scaffold(
               body: Center(
-                child: Container(
+                child: SizedBox(
                   width: MediaQuery.of(context).size.width / 1.5,
                   height: MediaQuery.of(context).size.width / 1.5,
                   child: const CircularProgressIndicator(strokeWidth: 10),

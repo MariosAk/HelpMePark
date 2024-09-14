@@ -6,6 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert' as cnv;
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -21,7 +23,6 @@ class _LoginPageState extends State<LoginPage> {
           "http://192.168.1.26:3000/login-user?email=$email&password=$password"));
       var datajson = cnv.jsonDecode(response.body)["results"];
       await prefs.setString('userid', datajson[0]["user_id"]);
-      await prefs.setInt("points", datajson[0]["points"]);
       return response.body;
     } catch (e) {
       print(e);
@@ -85,8 +86,8 @@ class _LoginPageState extends State<LoginPage> {
                           decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                const BoxShadow(
+                              boxShadow: const [
+                                BoxShadow(
                                     color: Color.fromRGBO(0, 100, 255, .2),
                                     blurRadius: 10,
                                     offset: Offset(0, 10))
@@ -140,7 +141,7 @@ class _LoginPageState extends State<LoginPage> {
                         InkWell(
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => RegisterPage()));
+                                  builder: (context) => const RegisterPage()));
                             },
                             child: const Text("Register",
                                 style: TextStyle(

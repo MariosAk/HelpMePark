@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pasthelwparking_v1/services/globals.dart' as globals;
 
 class buttonOverlay extends StatefulWidget {
+  const buttonOverlay({super.key});
+
   @override
   _buttonOverlayState createState() => _buttonOverlayState();
 }
@@ -37,7 +39,6 @@ class _buttonOverlayState extends State<buttonOverlay> {
           Hero(
               tag: "leftButton",
               child: ElevatedButton(
-                child: const Text('Continue'),
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.blue,
                   backgroundColor: Colors.white,
@@ -49,6 +50,7 @@ class _buttonOverlayState extends State<buttonOverlay> {
                 ),
                 onPressed: () =>
                     {Navigator.pop(context), globals.heroOverlay = false},
+                child: const Text('Continue'),
               )),
         ])));
   }

@@ -11,7 +11,7 @@ class Car {
 
 class CarPick extends StatefulWidget {
   final String? email;
-  CarPick(this.email);
+  const CarPick(this.email, {super.key});
   @override
   _CarPickState createState() => _CarPickState();
 }
@@ -34,73 +34,73 @@ class _CarPickState extends State<CarPick> {
 
   @override
   Widget build(BuildContext context) {
-    List<Car> _carList = [
+    List<Car> carList = [
       Car(
           Image(
-            image: AssetImage('Assets/Images/Sedan.png'),
+            image: const AssetImage('Assets/Images/Sedan.png'),
             width: MediaQuery.of(context).size.width / 4,
             height: MediaQuery.of(context).size.height / 4,
           ),
           'Sedan'),
       Car(
           Image(
-            image: AssetImage('Assets/Images/Coupe.png'),
+            image: const AssetImage('Assets/Images/Coupe.png'),
             width: MediaQuery.of(context).size.width / 4,
             height: MediaQuery.of(context).size.height / 4,
           ),
           'Coupe'),
       Car(
           Image(
-            image: AssetImage('Assets/Images/Pickup.png'),
+            image: const AssetImage('Assets/Images/Pickup.png'),
             width: MediaQuery.of(context).size.width / 4,
             height: MediaQuery.of(context).size.height / 4,
           ),
           'Pickup'),
       Car(
           Image(
-            image: AssetImage('Assets/Images/Jeep.png'),
+            image: const AssetImage('Assets/Images/Jeep.png'),
             width: MediaQuery.of(context).size.width / 4,
             height: MediaQuery.of(context).size.height / 4,
           ),
           'Jeep'),
       Car(
           Image(
-            image: AssetImage('Assets/Images/Wagon.png'),
+            image: const AssetImage('Assets/Images/Wagon.png'),
             width: MediaQuery.of(context).size.width / 4,
             height: MediaQuery.of(context).size.height / 4,
           ),
           'Wagon'),
       Car(
           Image(
-            image: AssetImage('Assets/Images/Crossover.png'),
+            image: const AssetImage('Assets/Images/Crossover.png'),
             width: MediaQuery.of(context).size.width / 4,
             height: MediaQuery.of(context).size.height / 4,
           ),
           'Crossover'),
       Car(
           Image(
-            image: AssetImage('Assets/Images/Hatchback.png'),
+            image: const AssetImage('Assets/Images/Hatchback.png'),
             width: MediaQuery.of(context).size.width / 4,
             height: MediaQuery.of(context).size.height / 4,
           ),
           'Hatchback'),
       Car(
           Image(
-            image: AssetImage('Assets/Images/Van.png'),
+            image: const AssetImage('Assets/Images/Van.png'),
             width: MediaQuery.of(context).size.width / 4,
             height: MediaQuery.of(context).size.height / 4,
           ),
           'Van'),
       Car(
           Image(
-            image: AssetImage('Assets/Images/SportCoupe.png'),
+            image: const AssetImage('Assets/Images/SportCoupe.png'),
             width: MediaQuery.of(context).size.width / 4,
             height: MediaQuery.of(context).size.height / 4,
           ),
           'Sportcoupe'),
       Car(
           Image(
-            image: AssetImage('Assets/Images/SUV.png'),
+            image: const AssetImage('Assets/Images/SUV.png'),
             width: MediaQuery.of(context).size.width / 4,
             height: MediaQuery.of(context).size.height / 4,
           ),
@@ -123,19 +123,19 @@ class _CarPickState extends State<CarPick> {
           appBar: AppBar(
             elevation: 0,
             backgroundColor: Colors.transparent,
-            title: Text("Pick your car type"),
+            title: const Text("Pick your car type"),
             centerTitle: true,
           ),
           body: Center(
-            child: Container(
+            child: SizedBox(
               height: MediaQuery.of(context).size.height,
               child: ListView.builder(
-                itemCount: _carList.length,
+                itemCount: carList.length,
                 itemBuilder: (context, index) {
                   borders.add(false);
                   return GestureDetector(
                     child: Container(
-                      margin: EdgeInsets.all(20),
+                      margin: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
                         border: tappedIndex == index
                             ? Border.all(color: Colors.white, width: 3.0)
@@ -144,7 +144,7 @@ class _CarPickState extends State<CarPick> {
                               ),
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      child: _carList[index].image,
+                      child: carList[index].image,
                     ),
                     onTap: () {
                       showModalBottomSheet<void>(
@@ -159,9 +159,8 @@ class _CarPickState extends State<CarPick> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
                                   Text(
-                                      'You picked ${_carList[index].carType} cartype.'),
+                                      'You picked ${carList[index].carType} cartype.'),
                                   ElevatedButton(
-                                    child: const Text('Continue'),
                                     style: ElevatedButton.styleFrom(
                                       foregroundColor: Colors.blue,
                                       backgroundColor: Colors.white,
@@ -170,24 +169,24 @@ class _CarPickState extends State<CarPick> {
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(32.0)),
-                                      minimumSize: Size(100, 40),
+                                      minimumSize: const Size(100, 40),
                                     ),
                                     onPressed: () => () {
                                       Navigator.pop(context);
-                                      registerCar(_carList[index].carType,
+                                      registerCar(carList[index].carType,
                                           widget.email);
                                       Navigator.of(context).push(
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  MyHomePage()));
+                                                  const MyHomePage()));
                                       ScaffoldMessenger.of(context)
-                                          .showSnackBar(SnackBar(
+                                          .showSnackBar(const SnackBar(
                                               content: Text(
                                                   "Registration completed.")));
                                     }(),
+                                    child: const Text('Continue'),
                                   ),
                                   ElevatedButton(
-                                      child: const Text('Back'),
                                       style: ElevatedButton.styleFrom(
                                         foregroundColor: Colors.red,
                                         backgroundColor: Colors.white,
@@ -196,9 +195,10 @@ class _CarPickState extends State<CarPick> {
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(32.0)),
-                                        minimumSize: Size(100, 40),
+                                        minimumSize: const Size(100, 40),
                                       ),
-                                      onPressed: () => Navigator.pop(context))
+                                      onPressed: () => Navigator.pop(context),
+                                      child: const Text('Back'))
                                 ],
                               ),
                             ),

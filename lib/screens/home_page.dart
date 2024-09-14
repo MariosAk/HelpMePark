@@ -2,7 +2,6 @@ import 'dart:async';
 //import 'dart:html';
 
 import 'package:flutter/material.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:mysql1/mysql1.dart';
 import 'package:pasthelwparking_v1/model/pushnotificationModel.dart';
 import 'package:http/http.dart' as http;
@@ -28,7 +27,7 @@ class HomePage extends StatefulWidget {
   double longitude;
   int notificationCount;
   HomePage(this.address, this.token, this.latitude, this.longitude,
-      this.notificationCount);
+      this.notificationCount, {super.key});
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -64,7 +63,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   String searchTxt = "";
   String lat = "";
   String lon = "";
-  MapController _mapctl = MapController();
+  final MapController _mapctl = MapController();
   TextEditingController textController = TextEditingController();
 
   int value = 0;
@@ -92,7 +91,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   void dispose() {
     _controller.dispose();
-    timer?.cancel();
+    timer.cancel();
     super.dispose();
   }
 
@@ -333,7 +332,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     Navigator.of(context)
                         .push(MaterialPageRoute(
                             builder: (context) =>
-                                notificationPage.NotificationPage()))
+                                const notificationPage.NotificationPage()))
                         .then((value) => setState(() {
                               widget.notificationCount = value;
                             })),
@@ -465,9 +464,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                             ),
                                             suggestionsCallback:
                                                 (pattern) async {
-                                              var data;
+                                              List data;
 
-                                              if (pattern?.isEmpty ?? true) {
+                                              if (pattern.isEmpty ?? true) {
                                                 data = await getAddress(" ");
                                                 return data;
                                               }
@@ -530,30 +529,31 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                       child: FlutterMap(
                                         mapController: _mapctl,
                                         options: MapOptions(
-                                            center: LatLng(widget.latitude,
+                                            initialCenter: LatLng(
+                                                widget.latitude,
                                                 widget.longitude),
-                                            zoom: 14),
-                                        layers: [
-                                          TileLayerOptions(
+                                            initialZoom: 14),
+                                        children: [
+                                          TileLayer(
                                             urlTemplate:
                                                 "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                                            subdomains: ['a', 'b', 'c'],
+                                            subdomains: const ['a', 'b', 'c'],
                                           ),
-                                          MarkerLayerOptions(
+                                          MarkerLayer(
                                             markers: [
                                               Marker(
                                                 width: 80.0,
                                                 height: 80.0,
                                                 point: LatLng(widget.latitude,
                                                     widget.longitude),
-                                                builder: (ctx) => const Icon(
+                                                child: const Icon(
                                                   Icons.pin_drop,
                                                   color: Colors.deepOrange,
                                                 ),
                                               ),
                                             ],
                                           ),
-                                          CircleLayerOptions(
+                                          CircleLayer(
                                             circles: [
                                               CircleMarker(
                                                   //radius marker
@@ -634,7 +634,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                                 transitionDuration:
                                                     const Duration(seconds: 2),
                                                 pageBuilder: (_, __, ___) =>
-                                                    buttonOverlay(),
+                                                    const buttonOverlay(),
                                               ),
                                             );
                                             addSearching();
@@ -791,7 +791,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                                                 pageBuilder: (_,
                                                                         __,
                                                                         ___) =>
-                                                                    buttonOverlay(),
+                                                                    const buttonOverlay(),
                                                               ),
                                                             );
                                                             addSearching();
@@ -839,7 +839,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                                 transitionDuration:
                                                     const Duration(seconds: 2),
                                                 pageBuilder: (_, __, ___) =>
-                                                    buttonOverlayRight(),
+                                                    const buttonOverlayRight(),
                                               ),
                                             );
                                             addLeaving();
@@ -929,7 +929,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                                               pageBuilder: (_,
                                                                       __,
                                                                       ___) =>
-                                                                  buttonOverlayRight(),
+                                                                  const buttonOverlayRight(),
                                                             ),
                                                           );
                                                           addLeaving();

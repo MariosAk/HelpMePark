@@ -13,7 +13,7 @@ class ClaimPage extends StatefulWidget {
   final int latestLeavingID, times_skipped;
   final double latitude, longitude;
   ClaimPage(this.latestLeavingID, this.userID, this.latitude, this.longitude,
-      this.carType, this.times_skipped, this.time);
+      this.carType, this.times_skipped, this.time, {super.key});
   @override
   _ClaimPageState createState() => _ClaimPageState();
 }
@@ -39,7 +39,7 @@ class _ClaimPageState extends State<ClaimPage> {
         }
       });
     });
-    Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 1), () {
       setState(() {
         progress = 1;
       });
