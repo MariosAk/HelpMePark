@@ -27,7 +27,8 @@ class HomePage extends StatefulWidget {
   double longitude;
   int notificationCount;
   HomePage(this.address, this.token, this.latitude, this.longitude,
-      this.notificationCount, {super.key});
+      this.notificationCount,
+      {super.key});
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -57,8 +58,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   Animation<double>? _animation;
 
-  String ApiKey = '';
-  String TomTomApiKey = '';
+  String ApiKey = 'AIzaSyBghQsgXKFjMw5LG79JTmLNgibSc2atYZM';
+  String TomTomApiKey = 'qa5MzxXesmBUxRLaWQnFRmMZ2D33kE7b';
   final _controller = TextEditingController();
   String searchTxt = "";
   String lat = "";
@@ -536,8 +537,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                         children: [
                                           TileLayer(
                                             urlTemplate:
-                                                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                                            subdomains: const ['a', 'b', 'c'],
+                                                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                                                userAgentPackageName: "com.example.pasthelwparking_v1"
                                           ),
                                           MarkerLayer(
                                             markers: [

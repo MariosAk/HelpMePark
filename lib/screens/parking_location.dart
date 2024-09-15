@@ -14,8 +14,9 @@ class ParkingLocation extends StatefulWidget {
   final double longitude;
   final String userID;
   final int times_skipped, latestLeavingID;
-  const ParkingLocation(this.times_skipped, this.data, this.latitude, this.longitude,
-      this.userID, this.latestLeavingID, {super.key});
+  const ParkingLocation(this.times_skipped, this.data, this.latitude,
+      this.longitude, this.userID, this.latestLeavingID,
+      {super.key});
   @override
   _ParkingLocationState createState() => _ParkingLocationState();
 }
@@ -211,10 +212,10 @@ class _ParkingLocationState extends State<ParkingLocation>
                                 initialZoom: 16),
                             children: [
                               TileLayer(
-                                urlTemplate:
-                                    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                                subdomains: const ['a', 'b', 'c'],
-                              ),
+                                  urlTemplate:
+                                      "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                                  userAgentPackageName:
+                                      "com.example.pasthelwparking_v1"),
                               MarkerLayer(
                                 markers: [
                                   Marker(
@@ -223,15 +224,15 @@ class _ParkingLocationState extends State<ParkingLocation>
                                     point: LatLng(
                                         double.parse(widget.data?["lat"]),
                                         double.parse(widget.data?["long"])),
-                                    child:
-                                        const Icon(Icons.pin_drop, color: Colors.red),
+                                    child: const Icon(Icons.pin_drop,
+                                        color: Colors.red),
                                   ),
                                   Marker(
                                     width: 80.0,
                                     height: 80.0,
                                     point: LatLng(lati, widget.longitude),
-                                    child:
-                                        const Icon(Icons.pin_drop, color: Colors.red),
+                                    child: const Icon(Icons.pin_drop,
+                                        color: Colors.red),
                                   ),
                                 ],
                               ),

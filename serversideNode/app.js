@@ -4,6 +4,10 @@ const mysql = require('mysql');
 const WebSocket = require('ws');
 const http = require('http');
 const uuidv4 = require('uuid').v4;
+const https = require('https');
+const { google } = require('googleapis');
+const MESSAGING_SCOPE = 'https://www.googleapis.com/auth/firebase.messaging';
+const SCOPES = [MESSAGING_SCOPE];
 
 const app = express();
 const port = 3000;
@@ -43,6 +47,26 @@ connection.connect((err) => {
   console.log('Connected to database!');
 });
 
+function getAccessToken() {
+  return new Promise(function(resolve, reject) {
+    const key = require('./service-account.json');
+    const jwtClient = new google.auth.JWT(
+      key.client_email,
+      null,
+      key.private_key,
+      SCOPES,
+      null
+    );
+    jwtClient.authorize(function(err, tokens) {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(tokens.access_token);
+    });
+  });
+}
+
 function getSearchersSendNotification(latitude, longitude, latestLeavingID, times_skipped = 0, time=""){
   let countNum = null;
   try{
@@ -60,32 +84,42 @@ function getSearchersSendNotification(latitude, longitude, latestLeavingID, time
             //     client.send(JSON.stringify({latestLeavingID: latestLeavingID, _latitude: latitude, _longitude:longitude, carType:results[0].carType, times_skipped: times_skipped, time: searcher[times_skipped].time}));
             //   }
             // });
-            fetch("https://fcm.googleapis.com/fcm/send", {
+            getAccessToken().then(function(accessToken){
+              console.log(accessToken);
+            fetch("https://fcm.googleapis.com/v1/projects/pasthelwparking/messages:send", {
               method: "POST",
               body: JSON.stringify({
-                to: results[0].fcm_token,
-                // notification: {
-                //   title: "A parking spot is free!",
-                //   body: "Someone just left an empty parking for you!"
-                // },
-                data: {
-                  lat: latitude,
-                  long: longitude,
-                  user_id: searcher[0].user_id,
-                  cartype: results[0].carType,
-                  time: searcher[0].time,
-                  id: searcher[0].id,
-                  times_skipped: times_skipped,
-                  latestLeavingID: latestLeavingID
-                },
-                click_action: "FLUTTER_NOTIFICATION_CLICK"
+                message:
+                {
+                  token: results[0].fcm_token,
+                  // notification: {
+                  //   title: "A parking spot is free!",
+                  //   body: "Someone just left an empty parking for you!"
+                  // },
+                  data: {
+                    lat: latitude.toString(),
+                    long: longitude.toString(),
+                    user_id: searcher[0].user_id,
+                    cartype: results[0].carType,
+                    time: searcher[0].time.toString(),
+                    id: searcher[0].id.toString(),
+                    times_skipped: times_skipped.toString(),
+                    latestLeavingID: latestLeavingID.toString()
+                  },
+                  android:{
+                    notification:{
+                      click_action: "FLUTTER_NOTIFICATION_CLICK"
+                    }
+                  }
+                }
               }
               ),
               headers: {
                 "Content-type": "application/json;",
-                "Authorization": ""
+                "Authorization": 'Bearer ' + accessToken
               }
-            });
+            })
+          });
 
           }
         });
