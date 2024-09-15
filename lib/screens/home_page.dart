@@ -58,8 +58,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   Animation<double>? _animation;
 
-  String ApiKey = 'AIzaSyBghQsgXKFjMw5LG79JTmLNgibSc2atYZM';
-  String TomTomApiKey = 'qa5MzxXesmBUxRLaWQnFRmMZ2D33kE7b';
+  String ApiKey = '';
+  String TomTomApiKey = '';
   final _controller = TextEditingController();
   String searchTxt = "";
   String lat = "";
@@ -536,10 +536,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                             initialZoom: 14),
                                         children: [
                                           TileLayer(
-                                            urlTemplate:
-                                                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-                                                userAgentPackageName: "com.example.pasthelwparking_v1"
-                                          ),
+                                              urlTemplate:
+                                                  "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                                              userAgentPackageName:
+                                                  "com.example.pasthelwparking_v1"),
                                           MarkerLayer(
                                             markers: [
                                               Marker(
