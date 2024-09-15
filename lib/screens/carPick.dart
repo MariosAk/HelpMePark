@@ -173,8 +173,8 @@ class _CarPickState extends State<CarPick> {
                                     ),
                                     onPressed: () => () {
                                       Navigator.pop(context);
-                                      registerCar(carList[index].carType,
-                                          widget.email);
+                                      registerCar(
+                                          carList[index].carType, widget.email);
                                       Navigator.of(context).push(
                                           MaterialPageRoute(
                                               builder: (context) =>

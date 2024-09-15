@@ -51,7 +51,7 @@ class _NotificationPageState extends State<NotificationPage> {
       case "Van":
         return const AssetImage('Assets/Images/Van.png');
       case "Sportcoupe":
-        return const AssetImage('Assets/Images/Sportcoupe.png');
+        return const AssetImage('Assets/Images/SportCoupe.png');
       case "SUV":
         return const AssetImage('Assets/Images/SUV.png');
       default:

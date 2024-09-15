@@ -13,7 +13,8 @@ class ClaimPage extends StatefulWidget {
   final int latestLeavingID, times_skipped;
   final double latitude, longitude;
   ClaimPage(this.latestLeavingID, this.userID, this.latitude, this.longitude,
-      this.carType, this.times_skipped, this.time, {super.key});
+      this.carType, this.times_skipped, this.time,
+      {super.key});
   @override
   _ClaimPageState createState() => _ClaimPageState();
 }
@@ -40,9 +41,11 @@ class _ClaimPageState extends State<ClaimPage> {
       });
     });
     Future.delayed(const Duration(seconds: 1), () {
-      setState(() {
-        progress = 1;
-      });
+      if (_timer!.isActive) {
+        setState(() {
+          progress = 1;
+        });
+      }
     });
     //_determinePosition();
     //registerNotification();
@@ -124,7 +127,7 @@ class _ClaimPageState extends State<ClaimPage> {
                   else if (widget.carType == "Van")
                     Image.asset('Assets/Images/Van.png')
                   else if (widget.carType == "Sportcoupe")
-                    Image.asset('Assets/Images/Sportcoupe.png')
+                    Image.asset('Assets/Images/SportCoupe.png')
                   else if (widget.carType == "SUV")
                     Image.asset('Assets/Images/SUV.png')
                   else
@@ -141,6 +144,7 @@ class _ClaimPageState extends State<ClaimPage> {
                         )),
                     onPressed: () {
                       postClaim();
+                      _timer?.cancel();
                       //globals.cancelSearch();
                       Navigator.pop(context, 'close');
                       Navigator.of(context).push(MaterialPageRoute(
@@ -159,6 +163,7 @@ class _ClaimPageState extends State<ClaimPage> {
                           fontWeight: FontWeight.w600,
                         )),
                     onPressed: () {
+                      _timer?.cancel();
                       globals.postSkip(
                           widget.times_skipped + 1,
                           widget.time,
